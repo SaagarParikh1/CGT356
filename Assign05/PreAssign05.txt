@@ -1,0 +1,112 @@
+Saagar Parikh
+
+**Part 1**
+
+CREATE TABLE Pet(
+	PetID int PRIMARY KEY,
+	Name varchar(25),
+	Descript varchar(100)    
+);
+----------------------------------
+
+INSERT INTO Pet(PetID, Name, Descript) VALUES(1, 'Rover', 'Fun dog');
+INSERT INTO Pet(PetID, Name, Descript) VALUES(2, 'Bob', 'Weird Fish');
+INSERT INTO Pet(PetID, Name, Descript) VALUES(3, 'Doug', 'Sad Cat');
+INSERT INTO Pet(PetID, Name, Descript) VALUES(4, 'Pete', 'Happy Frog');
+INSERT INTO Pet(PetID, Name, Descript) VALUES(5, 'Fred', 'Hairy Spider');
+
+SELECT * FROM `Pet`
+
+UPDATE Pet SET Name='Super Rover', Descript='Awesome Dog' WHERE PetID=1;
+
+DELETE FROM `Pet` WHERE PetID=3
+
+______________________________________________________________________________
+
+**Part 2**
+
+-- User logins and passwords
+CREATE TABLE UserPreA5(
+     login varchar(20) PRIMARY KEY,
+     pass  varchar(25),
+     name  varchar(50)
+);
+
+-- Type of account user has
+-- User could have multiple accounts
+-- Stores each account a user has
+-- 1 (Admin), 2 (Team Leader), 3 (Manager), 4 (Moderator)
+-- 5 (Coding Lead), 6 (Programmer)
+CREATE TABLE AccountPreA5(
+     account int,
+     login varchar(20) REFERENCES UserPreA5(login),
+     descript varchar(100),
+     PRIMARY KEY(account, login)
+);
+
+-- Languages that each user knows
+-- User can know multiple languages
+-- Examples: C#, PHP, C++, Python...
+-- Proficiency:
+--   1 (novice), 2, 3, 4, 5 (Expert)
+CREATE TABLE LanguagePreA5(
+     language varchar(50),
+     login varchar(20) REFERENCES UserPreA5(login),
+     proficiency int,
+     PRIMARY KEY(language, login)
+);
+
+---------------------------------------------------
+
+INSERT INTO `UserPreA5`(`login`, `pass`, `name`) VALUES ('123','abc','Bob');
+INSERT INTO `UserPreA5`(`login`, `pass`, `name`) VALUES ('456','def','Frank');
+INSERT INTO `UserPreA5`(`login`, `pass`, `name`) VALUES ('789','ghi','Douglass');
+
+SELECT * FROM `UserPreA5`
+-------------------------------------------------------------
+
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('1','123','Admin');
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('3','123','Manager');
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('2','456','Team Leader');
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('5','456','Coding Lead');
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('4','789','Moderator');
+INSERT INTO `AccountPreA5`(`account`, `login`, `descript`) VALUES ('6','789','Programmer');
+
+SELECT * FROM `AccountPreA5`
+
+UPDATE `AccountPreA5` SET `account`='4',`login`='123',`descript`='Moderator' WHERE account=1
+----------------------------------------------------------
+
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('C#','123','2');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('PHP','123','3');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('Python','123','5');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('C++','456','3');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('HTML','456','5');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('CSS','456','4');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('C#','789','1');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('CSS','789','3');
+INSERT INTO `LanguagePreA5`(`language`, `login`, `proficiency`) VALUES ('Python','789','4');
+
+SELECT * FROM `LanguagePreA5`
+
+UPDATE `LanguagePreA5` SET `language`='Java',`login`='123',`proficiency`='5' WHERE language='PHP';
+
+DELETE FROM `LanguagePreA5` WHERE language='C#' AND login='123'; 
+DELETE FROM `LanguagePreA5` WHERE language='HTML' AND login='456'; 
+DELETE FROM `LanguagePreA5` WHERE language='CSS' AND login='789'; 
+
+SELECT `language`, `login`, `proficiency` FROM `LanguagePreA5` WHERE login='123';
+SELECT `language`, `login`, `proficiency` FROM `LanguagePreA5` WHERE login='456';
+SELECT `language`, `login`, `proficiency` FROM `LanguagePreA5` WHERE login='789';
+
+
+
+
+
+
+
+
+
+
+
+
