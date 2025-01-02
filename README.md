@@ -1,1 +1,2 @@
-# Cnit356
+# CGT 35600: Web Programming, Development And Data Integration
+A course focusing on the development of dynamic content and applications to facilitate information distribution. The course stresses development strategies for managing the rapidly changing information of corporations and organizations for just-in-time distribution, using authoring programs to create interactive multimedia products that utilize database management systems, file systems, and XML to provide a method for visualizing and manipulating that data. 
